@@ -31,7 +31,6 @@ Any additional features that fit on a social network's profile page are encourag
 	<h1>Welcome to your profile page</h1>
 	<div>
 		<p>You are logged in as <?= $_SESSION['user']."." ?></p>
-		<p><a href="logout.php">Logout?</a></p>
 		
 		<!-- need to change the second part of the condition -->
 		<?php if ( $_SESSION['user'] == $_SESSION['profile'] ){ ?>
