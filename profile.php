@@ -11,7 +11,6 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 
 <?php
 	session_start();
-	//addMenu();
 	
 	// Check to see if the user is logged in. If they are not, then redirect them to the index/login page.
 	if(!(isset($_SESSION['user']))){
@@ -36,11 +35,16 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		
 		<!-- need to change the second part of the condition -->
 		<?php if ( $_SESSION['user'] == $_SESSION['profile'] ){ ?>
-			<p><a href="edit.php">Edit</a></p>
+			<input type="button" id="edit" value="Edit" onClick="toggleVis('edit_info');" />
 		<?php } ?>
 	</div>
 	<div>
 		<p> job, school, lives, relationship, birthday, likes, </p>
+		<div id="edit_info">
+			<label for="Basic Info">Basic Info:</label>
+				<textarea rows="4" cols="50"> job, school, lives, relationship, birthday, likes, </textarea>
+			</br>
+		<div>
 	</div>
 	<div>
 		<p>Try uploading an image.</p>
@@ -58,11 +62,11 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 	<div>
 		<p> Status' Big Woophf want to fight about it </p>
 		<fieldset>
-			<p> Status 1 </p> </br>
-			<p> Status 2 </p> </br>
-			<p> Status 3 </p> </br>
-			<p> Status 4 </p> </br>
-			<p> Status 5 </p> </br>
+			<p> <?= $_SESSION['user'] ?> Status 1 </p> </br>
+			<p> <?= $_SESSION['user'] ?> Status 2 </p> </br>
+			<p> <?= $_SESSION['user'] ?> Status 3 </p> </br>
+			<p> <?= $_SESSION['user'] ?> Status 4 </p> </br>
+			<p> <?= $_SESSION['user'] ?> Status 5 </p> </br>
 		</fieldset>
 	</div>
 </body>
