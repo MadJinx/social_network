@@ -1,16 +1,17 @@
 <!--
-Display the last 5 status updates made by the user that belongs to the profile
-Display the information of the user who the profile belongs to
-If the profile page belongs to the current user, then give them an option to edit the page
-Some logo or simple site description
-A menu that allows users to navigate to their profile or any other that they have access to on the site (home, help, about, contact, etc..) in addition to allowing them to logout
-Any additional features that fit on a social network's profile page are encouraged but not required 
+		Display the last 5 status updates made by the user that belongs to the profile
+		Display the information of the user who the profile belongs to
+DONE	If the profile page belongs to the current user, then give them an option to edit the page
+		Some logo or simple site description
+DONE	A menu that allows users to navigate to their profile or any other that they have access to on the site (home, help, about, contact, etc..) in addition to allowing them to logout
+		Any additional features that fit on a social network's profile page are encouraged but not required 
 -->
 
 
 
 <?php
 	session_start();
+	//addMenu();
 	
 	// Check to see if the user is logged in. If they are not, then redirect them to the index/login page.
 	if(!(isset($_SESSION['user']))){
