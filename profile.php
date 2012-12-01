@@ -31,7 +31,6 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 	<h1>Welcome to your profile page</h1>
 	<div>
 		<p>You are logged in as <?= $_SESSION['user']."." ?></p>
-		<p><a href="logout.php">Logout?</a></p>
 		
 		<!-- need to change the second part of the condition -->
 		<?php if ( $_SESSION['user'] == $_SESSION['profile'] ){ ?>
