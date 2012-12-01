@@ -18,3 +18,7 @@
 .profiles img {
 	float:left;
 }
+
+#edit_info {
+	display:none;
+}
