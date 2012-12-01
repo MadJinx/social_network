@@ -15,6 +15,7 @@ function common_header(){
 <?php
 }
 
+// adds menu bar for all pages
 function addMenu() { ?>
 	<div id="menu">
 		<ul>
@@ -28,6 +29,15 @@ function addMenu() { ?>
 <?php
 }
 
+function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
+	<div class="profiles">
+		<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
+		<h4><?php echo $uname; ?></h4>
+		<p><?php echo $fname; echo $lname; ?></p>
+		<h5>Lives in <?php echo $lives; ?></h5>
+		<h5>From <?php echo $from; ?></h5>
+	</div>
+<?php }
 
 /*
 *  This function takes an uploaded image, resizes it, converts it to .jpg and stores it in a designated location

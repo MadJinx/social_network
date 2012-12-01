@@ -14,3 +14,7 @@
 	margin:0;
 	padding:0;
 }
+
+.profiles img {
+	float:left;
+}
