@@ -28,7 +28,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 <title>Your Profile</title>
 </head>
 <body>
-	<script type="text/javascript" src="profile_java.js"></script>
+	<?php addMenu(); ?>
 	<h1>Welcome to your profile page</h1>
 	<div>
 		<p>You are logged in as <?= $_SESSION['user']."." ?></p>

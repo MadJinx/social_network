@@ -1,3 +1,16 @@
 #nuser {
 	display:none;
 }
+
+#menu {
+	background:green;
+	position:fixed;
+	top:0;
+	right:0;
+}
+
+#menu ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
