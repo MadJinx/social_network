@@ -38,12 +38,55 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<?php } ?>
 	</div>
 	<div>
-		<p> job, school, lives, relationship, birthday, likes, </p>
+		<table>
+			<tr>
+				<td>Work:</td>
+				<td>Goodtimes</td>
+			</tr>
+			<tr>
+				<td>Education:</td>
+				<td>Colorado School of Mines</td>
+			</tr>
+			<tr>
+				<td>Lives In:</td>
+				<td>Golden, CO</td>
+			</tr>
+			<tr>
+				<td>From:</td>
+				<td>Colorado Springs, CO</td>
+			</tr>
+			<tr>
+				<td>Relationship:</td>
+				<td>Single</td>
+			</tr>
+		</table>
 		<div id="edit_info">
-			<label for="Basic Info">Basic Info:</label>
-				<textarea rows="4" cols="50"> job, school, lives, relationship, birthday, likes, </textarea>
-			</br>
-		<div>
+			<fieldset>
+				<label for="work">Work:</label>
+					<input type="text" name="work" id="work" value="job" />
+				<br />
+				<label for="edu">Education:</label>
+					<input type="text" name="edu" id="edu" value="school" />
+				<br />
+				<label for="lives">Lives In:</label>
+					<input type="text" name="liveCity" id="liveCity" value="city" />
+					<input type="text" name="liveState" id="liveState" value="state" />
+				<br />
+				<label for="from">From:</label>
+					<input type="text" name="fromCity" id="fromCity" value="city" />
+					<input type="text" name="fromState" id="fromState" value="State" />
+				<br />
+				<select>
+					<option> ---Select One---</option>
+					<option value="single">Single</option>
+					<option value="dating">Dating</option>
+					<option value="married">Married</option>
+					<option value="discerning">Discerning</option>
+				</select>
+				<br />
+				<input type="submit" value="Submit">
+			</fieldset>
+		</div>
 	</div>
 	<div>
 		<p>Try uploading an image.</p>
