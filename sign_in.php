@@ -29,11 +29,7 @@
 		</form>
 	</div>
 	<br/>
-	<hr/>
-	<p>OR</p>
-	<hr/>
-	<div>
-		<h3>Create New User Profile</h3>
+	<div id="nuser">
 		<form action="new_user.php" method="post">
 			<fieldset>
 				<label for="fname">First Name:</label>
@@ -55,5 +51,6 @@
 			</fieldset>
 		</form>
 	</div>
+	<input type="button" id="nu" value="Create New User profile" onClick="toggleVis('nuser');" />
 </body>
 </html>

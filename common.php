@@ -10,6 +10,8 @@ function common_header(){
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link href="common_style.css" type="text/css" rel="stylesheet" />
+	<script src="functions.js"></script>
+	<link rel="stylesheet" type="text/css" href="format.css">
 <?php
 }
 
