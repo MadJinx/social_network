@@ -15,6 +15,19 @@ function common_header(){
 <?php
 }
 
+function addMenu() { ?>
+	<div id="menu">
+		<ul>
+<!--			<li><img src="images/home.png" alt="home" onClick="warp('home');"></li>
+-->			<li><img src="images/profile.png" alt="profile" onClick="warp('profile');"></li>
+<!--			<li><img src="images/friends.png" alt="friends" onClick="warp('friends');"></li>
+			<li><img src="images/members.png" alt="members" onClick="warp('members');"></li>
+-->			<li><img src="images/logout.png" alt="logout" onClick="warp('logout');"></li>
+		</ul>
+	</div>
+<?php
+}
+
 
 /*
 *  This function takes an uploaded image, resizes it, converts it to .jpg and stores it in a designated location
@@ -116,11 +129,5 @@ else if (!(($ext == "jpg" || $ext == "gif" || $ext == "png") &&
 	// Clean up
 	imagedestroy($image);
 	imagedestroy($new);
-}
-
-function write($stuff) {
-	$hi = fopen('images/test.txt', 'w');
-	fwrite($hi, $stuff);
-	fclose($hi);
 }
 ?>

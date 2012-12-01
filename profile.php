@@ -13,6 +13,7 @@
 <title>Your Profile</title>
 </head>
 <body>
+	<?php addMenu(); ?>
 	<h1>Welcome to your profile page</h1>
 	<div>
 		<p>You are logged in as <?= $_SESSION['user']."." ?></p>
