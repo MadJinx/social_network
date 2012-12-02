@@ -17,6 +17,10 @@
 
 .profiles img {
 	float:left;
+	width:100px;
+	height:auto;
+	margin:0px;
+	padding:0px;
 }
 
 #edit_info {
