@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	$fname = $_POST['fname'];
 	$lname = $_POST['lname'];
 	$email = $_POST['email'];
@@ -16,6 +18,7 @@
 	if ($stmt->execute()) {
 		$stmt->close();
 		$db->close();
+		$_SESSION['user'] = $email;
 		header('location: profile.php');
 	}
 
