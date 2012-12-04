@@ -17,6 +17,17 @@ function validateInputField(field) {
 	return true;
 }
 
+function confirmRePassword(passwordField, repassField) {
+	if (password.value != repass.value) {
+		alert('Passwords do not match');
+		passwordField.style.backgroundColor = '#FFCCCC';
+		repassField.style.backgroundColor = '#FFCCCC';
+		return false;
+	}
+
+	return true;
+}
+
 function validateNewUser(form) {
 	var form = document.getElementById('new_user');
 	
@@ -25,6 +36,7 @@ function validateNewUser(form) {
 	success = validateInputField(form['email']) && success;
 	success = validateInputField(form['password']) && success;
 	success = validateInputField(form['repass']) && success;
+	success = confirmRePassword(form['password'], form['repass']) && success;
 	
 	return success;
 }
