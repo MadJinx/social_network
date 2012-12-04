@@ -30,21 +30,21 @@
 	</div>
 	<br/>
 	<div id="nuser">
-		<form action="new_user.php" method="post">
+		<form id="new_user" action="new_user.php" method="post" onsubmit="return validateNewUser()">
 			<fieldset>
-				<label for="fname">First Name:</label>
+				<label id="fname_label" for="fname">First Name:</label>
 					<input type="text" name="fname" id="fname" />
 				<br />
-				<label for="lname">Last Name:</label>
+				<label id="lname_label" for="lname">Last Name:</label>
 					<input type="text" name="lname" id="lname" />
 				<br />
-				<label for="email">Email Address:</label>
+				<label id="email_label" for="email">Email Address:</label>
 					<input type="text" name="email" id="email" />
 				<br />
-				<label for="password">Password:</label>
+				<label id="password_label" for="password">Password:</label>
 					<input type="password" name="password" id="password" />
 				<br />
-				<label for="repass">Re-Enter Password:</label>
+				<label id="repass_label" for="repass">Re-Enter Password:</label>
 					<input type="password" name="repass" id="repass" />
 				<br />
 				<input type="submit" value="Submit">
