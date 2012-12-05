@@ -5,6 +5,7 @@ DONE	If the profile page belongs to the current user, then give them an option t
 		Some logo or simple site description
 DONE	A menu that allows users to navigate to their profile or any other that they have access to on the site (home, help, about, contact, etc..) in addition to allowing them to logout
 		Any additional features that fit on a social network's profile page are encouraged but not required 
+		Add profile picture
 -->
 
 
@@ -24,6 +25,30 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 	//need to set to the person's page we view. 
 	$_SESSION['profile'] = $_SESSION['user'];
 ?>
+<?php
+	$email = $_SESSION['user'];
+	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
+	if (mysqli_connect_errno()) {
+		die('Failed to connect to database. Try again later.');
+	}
+
+	$query = 'select work, edu, liveCity, liveState, fromCity, fromState, relationship from users where email=csoto@mymail.mines.edu';
+	$stmt = $db->prepare($query);
+	$stmt->bind_param('s', $email);
+	$result = $stmt->query();
+
+	$row = $result->fetch_assoc();
+
+	$work = $row['work'];
+	$edu = $row['edu'];
+	$liveCity = $row['liveCity'];
+	$liveState = $row['liveState'];
+	$fromCity = $row['fromCity'];
+	$fromState = $row['fromState'];
+	$relationship = $row['relationship'];
+
+	$result->free();
+?>
 <title>Your Profile</title>
 </head>
 <body>
@@ -41,52 +66,54 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<table>
 			<tr>
 				<td>Work:</td>
-				<td>Goodtimes</td>
+				<td><?php $work ?></td>
 			</tr>
 			<tr>
 				<td>Education:</td>
-				<td>Colorado School of Mines</td>
+				<td><?php $edu ?></td>
 			</tr>
 			<tr>
 				<td>Lives In:</td>
-				<td>Golden, CO</td>
+				<td><?php $liveCity ?>, <?php $liveState ?></td>
 			</tr>
 			<tr>
 				<td>From:</td>
-				<td>Colorado Springs, CO</td>
+				<td><?php $fromCity ?>, <?php $fromState ?></td>
 			</tr>
 			<tr>
 				<td>Relationship:</td>
-				<td>Single</td>
+				<td><?php $relationship ?></td>
 			</tr>
 		</table>
-		<div id="edit_info">
-			<fieldset>
-				<label for="work">Work:</label>
-					<input type="text" name="work" id="work" value="job" />
-				<br />
-				<label for="edu">Education:</label>
-					<input type="text" name="edu" id="edu" value="school" />
-				<br />
-				<label for="lives">Lives In:</label>
-					<input type="text" name="liveCity" id="liveCity" value="city" />
-					<input type="text" name="liveState" id="liveState" value="state" />
-				<br />
-				<label for="from">From:</label>
-					<input type="text" name="fromCity" id="fromCity" value="city" />
-					<input type="text" name="fromState" id="fromState" value="State" />
-				<br />
-				<select>
-					<option> ---Select One---</option>
-					<option value="single">Single</option>
-					<option value="dating">Dating</option>
-					<option value="married">Married</option>
-					<option value="discerning">Discerning</option>
-				</select>
-				<br />
-				<input type="submit" value="Submit">
-			</fieldset>
-		</div>
+		<form action="edit.php" method="post">
+			<div id="edit_info">
+				<fieldset>
+					<label for="work">Work:</label>
+						<input type="text" name="work" id="work" value="<?php $work ?>" />
+					<br />
+					<label for="edu">Education:</label>
+						<input type="text" name="edu" id="edu" value="<?php $edu ?>" />
+					<br />
+					<label for="lives">Lives In:</label>
+						<input type="text" name="liveCity" id="liveCity" value="<?php $liveCity ?>" />
+						<input type="text" name="liveState" id="liveState" value="<?php $liveState ?>" />
+					<br />
+					<label for="from">From:</label>
+						<input type="text" name="fromCity" id="fromCity" value="<?php $fromCity ?>" />
+						<input type="text" name="fromState" id="fromState" value="<?php $fromState ?>" />
+					<br />
+					<select>
+						<option> ---Select One---</option>
+						<option value="single">Single</option>
+						<option value="dating">Dating</option>
+						<option value="married">Married</option>
+						<option value="discerning">Discerning</option>
+					</select>
+					<br />
+					<input type="submit" value="Submit">
+				</fieldset>
+			</div>
+		</form>
 	</div>
 	<div>
 		<p>Try uploading an image.</p>
