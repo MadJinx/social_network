@@ -26,18 +26,20 @@
 				die('Failed to connect to database. Try again later.');
 			}
 
-			$query = 'select fname, lname from users';
+			$query = 'select fname, lname, email from users';
 			$results = $db->query($query);
 			if (!$results) {
 				die('Invalid query' + mysqli_error());
 			}
-
+			$i = 0;
 			while ($row = $results->fetch_assoc()) {
 				$fname = $row['fname'];
 				$lname = $row['lname'];
-				echo "<p>$fname $lname</p>";
+				$email = $row['email'];
+				echo "<p>$fname $lname $email</p>";
+				$i++;
 			}
-
+			echo $i;
 			$results->close();
 			$db->close();
 		?>

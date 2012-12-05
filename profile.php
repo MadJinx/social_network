@@ -128,7 +128,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		</form>
 	</div> 
 	<div>
-		<p> Status' Big Woophf want to fight about it </p>
+		<p> Status Big Woophf want to fight about it! </p>
 		<fieldset>
 			<p> <?= $_SESSION['user'] ?> Status 1 </p> </br>
 			<p> <?= $_SESSION['user'] ?> Status 2 </p> </br>
