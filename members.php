@@ -10,10 +10,11 @@
 	// Call the common header function.
 	common_header();
 ?>
-	<title>Members</title>
+		<title>Members</title>
 	</head>
 	<body>
 		<?php addMenu(); ?>
+
 		<h1>Welcome to the Members Page</h1>
 		<h2>Befriend members by checking the checkbox next to their name and pressing the 'Save' button.</h2>
 
