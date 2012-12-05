@@ -6,18 +6,19 @@
 	$liveState = $_POST['liveState'];
 	$fromCity = $_POST['fromCity'];
 	$fromState = $_POST['fromState'];
-	if ($relationship == '---Select One---') {
+	if ($_POST['relationship'] == '---Select One---') {
 			$relationship = '';
 	}
 	$relationship = $_POST['relationship'];
+	$email = $_SESSION['user'];
 	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
 	if (mysqli_connect_errno()) {
 		die('Failed to connect to database. Try again later.');
 	}
 	
-	$query = 'update users set (work, edu, liveCity, liveState, fromCity, fromState, relationship) values(?, ?, ?, ?, ?, ?, ?) where email=$_SESSION['user']';
+	$query = 'update users set (work, edu, liveCity, liveState, fromCity, fromState, relationship) values(?, ?, ?, ?, ?, ?, ?) where email=?";
 	$stmt  = $db->prepare($query);
-	$stmt->bind_param('sssssss', $work, $edu, $liveCity, $liveState, $fromCity, $fromState, $relationship);
+	$stmt->bind_param('ssssssss', $work, $edu, $liveCity, $liveState, $fromCity, $fromState, $relationship, $email);
 	
 	if ($stmt->execute()) {
 		$stmt->close();

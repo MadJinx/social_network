@@ -101,7 +101,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 						<input type="text" name="fromCity" id="fromCity" value="<?php echo"$fromCity" ?>" />
 						<input type="text" name="fromState" id="fromState" value="<?php echo"$fromState" ?>" />
 					<br />
-					<select>
+					<select name="relationship">
 						<option> ---Select One---</option>
 						<option value="single">Single</option>
 						<option value="dating">Dating</option>
