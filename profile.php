@@ -26,28 +26,27 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 	$_SESSION['profile'] = $_SESSION['user'];
 ?>
 <?php
-	// $email = $_SESSION['user'];
-	// $db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-	// if (mysqli_connect_errno()) {
-		// die('Failed to connect to database. Try again later.');
-	// }
+	$email = $_SESSION['user'];
+	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
+	if (mysqli_connect_errno()) {
+		die('Failed to connect to database. Try again later.');
+	}
 
-	// $query = 'select work, edu, liveCity, liveState, fromCity, fromState, relationship from users where email=csoto@mymail.mines.edu';
-	// $stmt = $db->prepare($query);
-	// $stmt->bind_param('s', $email);
-	// $result = $stmt->query();
+	$query = 'select email, work, edu, liveCity, liveState, fromCity, fromState, relationship from users';
+	$result = $db->query($query);
 
-	// $row = $result->fetch_assoc();
-
-	// $work = $row['work'];
-	// $edu = $row['edu'];
-	// $liveCity = $row['liveCity'];
-	// $liveState = $row['liveState'];
-	// $fromCity = $row['fromCity'];
-	// $fromState = $row['fromState'];
-	// $relationship = $row['relationship'];
-
-	// $result->free();
+	while ($row = $result->fetch_assoc()){
+		if ($row['email'] == $email) {
+			$work = $row['work'];
+			$edu = $row['edu'];
+			$liveCity = $row['liveCity'];
+			$liveState = $row['liveState'];
+			$fromCity = $row['fromCity'];
+			$fromState = $row['fromState'];
+			$relationship = $row['relationship'];
+		}
+	}
+	$result->free();
 ?>
 <title>Your Profile</title>
 </head>
@@ -66,41 +65,41 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<table>
 			<tr>
 				<td>Work:</td>
-				<td><?php $work ?></td>
+				<td><?php echo"$work" ?></td>
 			</tr>
 			<tr>
 				<td>Education:</td>
-				<td><?php $edu ?></td>
+				<td><?php echo"$edu" ?></td>
 			</tr>
 			<tr>
 				<td>Lives In:</td>
-				<td><?php $liveCity ?>, <?php $liveState ?></td>
+				<td><?php echo"$liveCity" ?>, <?php echo"$liveState" ?></td>
 			</tr>
 			<tr>
 				<td>From:</td>
-				<td><?php $fromCity ?>, <?php $fromState ?></td>
+				<td><?php echo"$fromCity" ?>, <?php echo"$fromState" ?></td>
 			</tr>
 			<tr>
 				<td>Relationship:</td>
-				<td><?php $relationship ?></td>
+				<td><?php echo"$relationship" ?></td>
 			</tr>
 		</table>
 		<form action="edit.php" method="post">
 			<div id="edit_info">
 				<fieldset>
 					<label for="work">Work:</label>
-						<input type="text" name="work" id="work" value="<?php $work ?>" />
+						<input type="text" name="work" id="work" value="<?php echo"$work" ?>" />
 					<br />
 					<label for="edu">Education:</label>
-						<input type="text" name="edu" id="edu" value="<?php $edu ?>" />
+						<input type="text" name="edu" id="edu" value="<?php echo"$edu" ?>" />
 					<br />
 					<label for="lives">Lives In:</label>
-						<input type="text" name="liveCity" id="liveCity" value="<?php $liveCity ?>" />
-						<input type="text" name="liveState" id="liveState" value="<?php $liveState ?>" />
+						<input type="text" name="liveCity" id="liveCity" value="<?php echo"$liveCity" ?>" />
+						<input type="text" name="liveState" id="liveState" value="<?php echo"$liveState" ?>" />
 					<br />
 					<label for="from">From:</label>
-						<input type="text" name="fromCity" id="fromCity" value="<?php $fromCity ?>" />
-						<input type="text" name="fromState" id="fromState" value="<?php $fromState ?>" />
+						<input type="text" name="fromCity" id="fromCity" value="<?php echo"$fromCity" ?>" />
+						<input type="text" name="fromState" id="fromState" value="<?php echo"$fromState" ?>" />
 					<br />
 					<select>
 						<option> ---Select One---</option>
