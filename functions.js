@@ -1,6 +1,12 @@
 function toggleVis(id) {
 	var inv = document.getElementById(id);
-	inv.style.display = "block";
+	var style = document.defaultView.getComputedStyle(inv, null);
+	if (style['display'] != "none") {
+		inv.style.display = "none";
+	}
+	else {
+		inv.style.display = "block";
+	}
 }
 
 function warp(where) {

@@ -18,5 +18,29 @@
 	<body>
 		<?php addMenu(); ?>
 		<h1>Welcome to the Members Page</h1>
+
+		<?php
+			// Connect to DB
+			$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
+			if (mysqli_connect_errno()) {
+				die('Failed to connect to database. Try again later.');
+			}
+
+			$query = 'select fname, lname from users';
+			$results = $db->query($query);
+			if (!$results) {
+				die('Invalid query' + mysqli_error());
+			}
+
+			while ($row = $results->fetch_assoc()) {
+				$fname = $row['fname'];
+				$lname = $row['lname'];
+				echo "<p>$fname $lname</p>";
+			}
+
+			$results->close();
+			$db->close();
+		?>
+
 	</body>
 </html>
