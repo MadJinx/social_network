@@ -26,28 +26,28 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 	$_SESSION['profile'] = $_SESSION['user'];
 ?>
 <?php
-	$email = $_SESSION['user'];
-	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-	if (mysqli_connect_errno()) {
-		die('Failed to connect to database. Try again later.');
-	}
+	// $email = $_SESSION['user'];
+	// $db = new mysqli('localhost', 'team09', 'maroon', 'team09');
+	// if (mysqli_connect_errno()) {
+		// die('Failed to connect to database. Try again later.');
+	// }
 
-	$query = 'select work, edu, liveCity, liveState, fromCity, fromState, relationship from users where email=csoto@mymail.mines.edu';
-	$stmt = $db->prepare($query);
-	$stmt->bind_param('s', $email);
-	$result = $stmt->query();
+	// $query = 'select work, edu, liveCity, liveState, fromCity, fromState, relationship from users where email=csoto@mymail.mines.edu';
+	// $stmt = $db->prepare($query);
+	// $stmt->bind_param('s', $email);
+	// $result = $stmt->query();
 
-	$row = $result->fetch_assoc();
+	// $row = $result->fetch_assoc();
 
-	$work = $row['work'];
-	$edu = $row['edu'];
-	$liveCity = $row['liveCity'];
-	$liveState = $row['liveState'];
-	$fromCity = $row['fromCity'];
-	$fromState = $row['fromState'];
-	$relationship = $row['relationship'];
+	// $work = $row['work'];
+	// $edu = $row['edu'];
+	// $liveCity = $row['liveCity'];
+	// $liveState = $row['liveState'];
+	// $fromCity = $row['fromCity'];
+	// $fromState = $row['fromState'];
+	// $relationship = $row['relationship'];
 
-	$result->free();
+	// $result->free();
 ?>
 <title>Your Profile</title>
 </head>
