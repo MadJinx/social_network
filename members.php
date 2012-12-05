@@ -9,9 +9,6 @@
 	include_once("common.php");
 	// Call the common header function.
 	common_header();
-	
-	//need to set to the person's page we view. 
-	$_SESSION['profile'] = $_SESSION['user'];
 ?>
 	<title>Members</title>
 	</head>
@@ -28,18 +25,20 @@
 					die('Failed to connect to database. Try again later.');
 				}
 
-				$query = 'select fname, lname, id from users';
+				$query = 'select fname, lname, email, id from users';
 				$results = $db->query($query);
 				if (!$results) {
 					die('Invalid query ' + mysqli_error());
 				}
 
 				while ($row = $results->fetch_assoc()) {
-					$id = $row['id'];
-					$fname = $row['fname'];
-					$lname = $row['lname'];
-					$checkbox = "<input type='checkbox' name='friends[]' value='$id'/>";
-					echo "<p>$fname $lname $checkbox</p>";
+					if ($row['email'] != $_SESSION['user']) {
+						$id = $row['id'];
+						$fname = $row['fname'];
+						$lname = $row['lname'];
+						$checkbox = "<input type='checkbox' name='friends[]' value='$id'/>";
+						echo "<p>$fname $lname $checkbox</p>";
+					}
 				}
 
 				$results->close();
