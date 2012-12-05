@@ -18,7 +18,7 @@ function validateInputField(field) {
 }
 
 function confirmRePassword(passwordField, repassField) {
-	if (password.value != repass.value) {
+	if (passwordField.value != repassField.value) {
 		alert('Passwords do not match');
 		passwordField.style.backgroundColor = '#FFCCCC';
 		repassField.style.backgroundColor = '#FFCCCC';
