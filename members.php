@@ -10,10 +10,11 @@
 	// Call the common header function.
 	common_header();
 ?>
-	<title>Members</title>
+		<title>Members</title>
 	</head>
 	<body>
 		<?php addMenu(); ?>
+
 		<h1>Welcome to the Members Page</h1>
 		<h2>Befriend members by checking the checkbox next to their name and pressing the 'Save' button.</h2>
 
@@ -25,7 +26,11 @@
 					die('Failed to connect to database. Try again later.');
 				}
 
-				$query = 'select fname, lname, email, id from users';
+				$email = $_SESSION['user'];
+				$query = "select fname, lname, email, id, (
+					select id in (
+						select user2 from friends where user1 = (
+							select id from users where email = '$email'))) as friend from users";
 				$results = $db->query($query);
 				if (!$results) {
 					die('Invalid query ' + mysqli_error());
@@ -36,7 +41,8 @@
 						$id = $row['id'];
 						$fname = $row['fname'];
 						$lname = $row['lname'];
-						$checkbox = "<input type='checkbox' name='friends[]' value='$id'/>";
+						$checked = $row['friend'] ? 'checked' : '';
+						$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
 						echo "<p>$fname $lname $checkbox</p>";
 					}
 				}

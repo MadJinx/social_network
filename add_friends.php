@@ -20,7 +20,29 @@
 		die('Failed to execute query');
 	}
 
-	// Add friendship to DB
+	// Obtain current friends list ids
+	$query = "select user2 from friends where user1 = $id";
+	$results = $db->query($query);
+	if (!$results) {
+		die('Invalid query');
+	}
+
+	// Delete friends who now have their name unchecked
+	$stmt = 'delete from friends where user2 = ?';
+	$prep_stmt = $db->prepare($stmt);
+
+	while ($row = $results->fetch_assoc()) {
+		$id2 = $row['user2'];
+		if (!in_array($id2, $_POST['friends'])) {
+			$prep_stmt->bind_param('i', $id2);
+			if (!$prep_stmt->execute()) {
+				die("Could not delete user with id $id2");
+			}
+		}
+	}
+	$prep_stmt->close();
+
+	// Add new friendships to DB
 	$stmt = 'insert into friends values(?, ?)';
 	$prep_stmt = $db->prepare($stmt);
 
@@ -34,5 +56,6 @@
 
 	$prep_stmt->close();
 	$db->close();
+
 	header('location: members.php');
 ?>
