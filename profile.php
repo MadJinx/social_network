@@ -118,10 +118,9 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<p>Try uploading an image.</p>
 		<form action="upload_test.php" method="post" name="upload_image" enctype="multipart/form-data">
 			<fieldset>
-<!--				<label for="upload_image">Pick an image to upload:</label>
+				<label for="upload_image">Pick an image to upload:</label>
 					<input type="file" name="upload_image" id="upload_image"/>
-				<br />
--->				<label for"img_name">What do you want your image to be called?</label>
+				<label for"img_name">What do you want your image to be called?</label>
 					<input type="text" name="img_name" id="img_name" />
 				<input type="submit" value="Upload" />
 			</fieldset>

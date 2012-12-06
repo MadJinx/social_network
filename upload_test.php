@@ -17,8 +17,7 @@
 		$img_name = $_POST['img_name'];
 
 	// Call create image function from common.php
-	// create_images($img_name);
-	write($img_name);
+	create_images($img_name);
 	common_header();
 
 ?>
