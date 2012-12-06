@@ -16,8 +16,11 @@
 		die('Failed to connect to database. Try again later.');
 	}
 	
-	$query = 'update users set (work, edu, liveCity, liveState, fromCity, fromState, relationship) values(?, ?, ?, ?, ?, ?, ?) where email=?";
+	$query = 'update users set work = ?, edu = ?, liveCity = ?, liveState = ?, fromCity = ?, fromState = ?, relationship = ? where email = ?';
 	$stmt  = $db->prepare($query);
+	if (!$stmt) {
+		die ('Bad query');
+	}
 	$stmt->bind_param('ssssssss', $work, $edu, $liveCity, $liveState, $fromCity, $fromState, $relationship, $email);
 	
 	if ($stmt->execute()) {
