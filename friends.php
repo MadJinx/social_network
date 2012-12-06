@@ -50,7 +50,15 @@
 				if ($prep_query->execute()) {
 					$prep_query->bind_result($fname, $lname);
 					$prep_query->fetch();
-					echo "<p>$fname $lname</p>";
+		?>
+					<form action="unfriend.php" method="post">
+						<p>
+							<?php echo "$fname $lname "?>
+							<input type='text' name='user2' value='<?php echo $id2?>' style='display:none'/>
+							<input type='submit' value='Unfriend' style='display:inline'/>
+						</p>
+					</form>
+		<?php
 				}
 				else {
 					die('Error obtaining friends list');
