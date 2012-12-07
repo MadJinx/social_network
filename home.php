@@ -18,5 +18,10 @@
 	<body>
 		<?php addMenu(); ?>
 		<h1>Welcome to the Home Page</h1>
+		<form action='home.php' method='post'>
+			<fieldset>
+				<input type='text' />
+			</fieldset>
+		</form>
 	</body>
 </html>
