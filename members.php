@@ -37,39 +37,50 @@
 			<input type="submit" value="Search"/>
 		</form>
 
-		<form method="post" action="add_friends.php">
-			<?php
-				// Connect to DB
-				$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-				if (mysqli_connect_errno()) {
-					die('Failed to connect to database. Try again later.');
-				}
-
-				$email = $_SESSION['user'];
-				$query = "select fname, lname, email, id, (
-					select id in (
-						select user2 from friends where user1 = (
-							select id from users where email = '$email'))) as friend from users";
-				$results = $db->query($query);
-				if (!$results) {
-					die('Invalid query ' + mysqli_error());
-				}
-
-				while ($row = $results->fetch_assoc()) {
-					if ($row['email'] != $_SESSION['user']) {
-						$id = $row['id'];
-						$fname = $row['fname'];
-						$lname = $row['lname'];
-						$checked = $row['friend'] ? 'checked' : '';
-						$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
-						echo "<p>$fname $lname $checkbox</p>";
+		<?php if (isset($_GET['email'])) { ?>
+			<form method="post" action="add_friends.php">
+				<?php
+					// Connect to DB
+					$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
+					if (mysqli_connect_errno()) {
+						die('Failed to connect to database. Try again later.');
 					}
-				}
 
-				$results->close();
-				$db->close();
-			?>
-			<input type='submit' value='Save'/>
-		</form>
+					$email = $_SESSION['user'];
+					$search = $_GET['email'];
+					$query = "select fname, lname, email, id, (
+						select id in (
+							select user2 from friends where user1 = (
+								select id from users where email = '$email'))) as friend from users where email like '%$search%'";
+					$results = $db->query($query);
+					if (!$results) {
+						die('Invalid query ' + mysqli_error());
+					}
+
+					$count = 0;
+					while ($row = $results->fetch_assoc()) {
+						if ($row['email'] != $_SESSION['user']) {
+							$id = $row['id'];
+							$fname = $row['fname'];
+							$lname = $row['lname'];
+							$checked = $row['friend'] ? 'checked' : '';
+							$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
+							echo "<p>$fname $lname $checkbox</p>";
+							++$count;
+						}
+					}
+
+					if ($count == 0) {
+						echo "<p>No Members Found</p>";
+					}
+					else {
+						echo "<input type='submit' value='Save'/>";
+					}
+
+					$results->close();
+					$db->close();
+				?>
+			</form>
+		<?php } ?>
 	</body>
 </html>
