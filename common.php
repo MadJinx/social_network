@@ -33,7 +33,7 @@ function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 	<div class="profiles">
 		<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
 		<h4><?php echo $uname; ?></h4>
-		<p><?php echo $fname; echo $lname; ?></p>
+		<p><?php echo "$fname $lname"; ?></p>
 		<h5>Lives in <?php echo $lives; ?></h5>
 		<h5>From <?php echo $from; ?></h5>
 	</div>
@@ -43,22 +43,6 @@ function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 *  This function takes an uploaded image, resizes it, converts it to .jpg and stores it in a designated location
 */
 function create_images($img_name){
-
-/*
-$filecheck = basename($_FILES['upload']['name']);
-$filetype = $_FILES["upload"]["type"];
-$ext = strtolower(substr($filecheck, strrpos($filecheck, '.') + 1));
-if(strlen($_REQUEST['story'].value) < 20){
-	header("Location: newstory.php?error=content");
-}
-else if ($_FILES["imagefile"]["size"] > 10120000){
-	header("Location: newstory.php?error=filesize");
-}
-else if (!(($ext == "jpg" || $ext == "gif" || $ext == "png") && 
-	($filetype == "image/jpeg" || $filetype == "image/gif" || $filetype == "image/png" || $filetype == "image/pjpeg"))){
-    header("Location: newstory.php?error=filetype");
-}
-*/
 
 	// Check to see if the file uploaded. NOTE: 'upload_image' is the name of the file input type on profile.php
 	if(!is_uploaded_file($_FILES['upload_image']['tmp_name']) || $_FILES['upload_image']['error'] != UPLOAD_ERR_OK){
