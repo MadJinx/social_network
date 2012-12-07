@@ -1,9 +1,19 @@
+textarea {
+	resize: none;
+	display: block;
+	background-color: #F5F5FF;
+}
+
+fieldset {
+	background-color: #CCCCEE;
+}
+
 #nuser {
 	display:none;
 }
 
 #menu {
-	background:aqua;
+	background-color:aqua;
 	position:fixed;
 	top:0;
 	right:0;
