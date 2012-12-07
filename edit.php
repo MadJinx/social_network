@@ -6,10 +6,10 @@
 	$liveState = $_POST['liveState'];
 	$fromCity = $_POST['fromCity'];
 	$fromState = $_POST['fromState'];
-	if ($_POST['relationship'] == '---Select One---') {
-			$relationship = '';
-	}
 	$relationship = $_POST['relationship'];
+	if ($relationship == '---Select One---') {
+			$relationship = 'Single';
+	}
 	$email = $_SESSION['user'];
 	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
 	if (mysqli_connect_errno()) {
