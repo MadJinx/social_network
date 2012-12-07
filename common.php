@@ -17,7 +17,9 @@ function common_header(){
 
 // adds menu bar for all pages
 function addMenu() { ?>
-	<div id="menu">
+	<div class="menu imen" onClick="toggleVis('m');">Menu</div>
+	<div class="menu" id="m">
+		<div class="imen" onClick="toggleVis('m');">Menu</div>
 		<ul>
 			<li><img src="images/home.png" alt="home" onClick="warp('home');"></li>
 			<li><img src="images/profile.png" alt="profile" onClick="warp('profile');"></li>
@@ -31,11 +33,19 @@ function addMenu() { ?>
 
 function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 	<div class="profiles">
-		<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
-		<h4><?php echo $uname; ?></h4>
-		<p><?php echo "$fname $lname"; ?></p>
-		<h5>Lives in <?php echo $lives; ?></h5>
-		<h5>From <?php echo $from; ?></h5>
+		<table>
+			<tr>
+				<td>
+					<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
+				</td>
+				<td>
+					<h4><?php echo $uname; ?></h4>
+					<p><?php echo "$fname $lname"; ?></p>
+					<h5>Lives in <?php echo $lives; ?></h5>
+					<h5>From <?php echo $from; ?></h5>
+				</td>
+			</tr>
+		</table>
 	</div>
 <?php }
 
