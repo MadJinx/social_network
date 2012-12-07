@@ -12,27 +12,44 @@ fieldset {
 	display:none;
 }
 
-#menu {
+.menu {
 	background-color:aqua;
 	position:fixed;
 	top:0;
 	right:0;
 }
 
-#menu ul {
+.menu ul {
 	list-style-type:none;
 	margin:0;
 	padding:0;
 }
 
+#m {
+	display:none;
+}
+
+.imen {
+	padding:.5em;
+}
+
 .profiles img {
-	float:left;
 	width:100px;
 	height:auto;
-	margin:0px;
+	margin:5px;
 	padding:0px;
+}
+
+#friend_form input {
+	position:relative;
+	top:-30px;
 }
 
 #edit_info {
 	display:none;
+}
+
+#search {
+	float:right;
+	margin:1.5em;
 }

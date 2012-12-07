@@ -18,6 +18,13 @@
 		<h1>Welcome to the Members Page</h1>
 		<h2>Befriend members by checking the checkbox next to their name and pressing the 'Save' button.</h2>
 
+		<form method="get" action="members.php" id="search">
+			First Name:<input type="text" name="first" id="first"/><br/>
+			Last Name:<input type="text" name="last" id="last"/><br/>
+			Email:<input type="text" name="email" id="email"/><br/>
+			<input type="submit" value="Search"/>
+		</form>
+
 		<form method="post" action="add_friends.php">
 			<?php
 				// Connect to DB
