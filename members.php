@@ -19,9 +19,10 @@
 		<h2>Befriend members by checking the checkbox next to their name and pressing the 'Save' button.</h2>
 
 		<form method="get" action="members.php" id="search">
-			First Name:<input type="text" name="first" id="first"/><br/>
-			Last Name:<input type="text" name="last" id="last"/><br/>
-			Email:<input type="text" name="email" id="email"/><br/>
+			<p>Search for Members you know:</p>
+			<p>First Name:<input type="text" name="first" id="first"/></p>
+			<p>Last Name:<input type="text" name="last" id="last"/></p>
+			<p>Email:<input type="text" name="email" id="email"/></p>
 			<input type="submit" value="Search"/>
 		</form>
 
