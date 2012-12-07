@@ -13,15 +13,16 @@ fieldset {
 }
 
 .menu {
-	background-color:aqua;
+	background-color: #00E0FF;
 	position:fixed;
 	top:0;
 	right:0;
+	border: 2px solid black;
 }
 
-.menu ul {
+ul {
 	list-style-type:none;
-	margin:0;
+	margin-left: 6px;
 	padding:0;
 }
 
