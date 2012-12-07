@@ -51,11 +51,11 @@
 					$prep_query->bind_result($fname, $lname);
 					$prep_query->fetch();
 		?>
-					<form action="unfriend.php" method="post">
+					<form action="unfriend.php" method="post" id='friend_form'>
 						<p>
-							<?php echo "$fname $lname "?>
-							<input type='text' name='user2' value='<?php echo $id2?>' style='display:none'/>
-							<input type='submit' value='Unfriend' style='display:inline'/>
+							<?php addProfile('unknown', $fname, $lname, 'unknown', 'unknown', 'frown.jpg'); ?>
+							<input type='hidden' name='user2' value='<?php echo $id2?>'/>
+							<input type='submit' value='Unfriend'/>
 						</p>
 					</form>
 		<?php
