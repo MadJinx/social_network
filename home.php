@@ -20,7 +20,7 @@
 		<h1>Welcome to the Home Page</h1>
 		<form action='home.php' method='post'>
 			<fieldset>
-				<input type='text' />
+				<textarea rows='4' cols='80' maxlength='400' placeholder="Anything you'd like to share today?"> </textarea>
 			</fieldset>
 		</form>
 	</body>
