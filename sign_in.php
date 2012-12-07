@@ -22,12 +22,16 @@
 		<h3>Log In</h3>
 		<form action="user_check.php" method="post">
 			<fieldset>
-				<label for="username">Username (email):</label>
-					<input type="text" name="username" id="username" />
-				<br />
-				<label for="password">Password:</label>
-					<input type="password" name="password" id="password" />
-				<br />
+				<table>
+					<tr>
+						<td>Username (email):</td>
+						<td><input type="text" name="username" id="username" /></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" name="password" id="password" /></td>
+					</tr>
+				</table>
 				<input type="submit" value="Login" />
 			</fieldset>
 		</form>
@@ -37,21 +41,28 @@
 	<div id="nuser">
 		<form id="new_user" action="new_user.php" method="post" onsubmit="return validateNewUser()">
 			<fieldset>
-				<label id="fname_label" for="fname">First Name:</label>
-					<input type="text" name="fname" id="fname" />
-				<br />
-				<label id="lname_label" for="lname">Last Name:</label>
-					<input type="text" name="lname" id="lname" />
-				<br />
-				<label id="email_label" for="email">Email Address:</label>
-					<input type="text" name="email" id="email" />
-				<br />
-				<label id="password_label" for="password">Password:</label>
-					<input type="password" name="password" id="password" />
-				<br />
-				<label id="repass_label" for="repass">Re-Enter Password:</label>
-					<input type="password" name="repass" id="repass" />
-				<br />
+				<table>
+					<tr>
+						<td>First Name:</td>
+						<td><input type="text" name="fname" id="fname" /></td>
+					</tr>
+					<tr>
+						<td>Last Name:</td>
+						<td><input type="text" name="lname" id="lname" /></td>
+					</tr>
+					<tr>
+						<td>Email Address:</td>
+						<td><input type="text" name="email" id="email" /></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" name="password" id="password" /></td>
+					</tr>
+					<tr>
+						<td>Re-Enter Password:</td>
+						<td><input type="password" name="repass" id="repass" /></td>
+					</tr>
+				</table>
 				<input type="submit" value="Register">
 			</fieldset>
 		</form>

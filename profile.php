@@ -87,28 +87,36 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<form action="edit.php" method="post">
 			<div id="edit_info">
 				<fieldset>
-					<label for="work">Work:</label>
-						<input type="text" name="work" id="work" value="<?php echo"$work" ?>" />
-					<br />
-					<label for="edu">Education:</label>
-						<input type="text" name="edu" id="edu" value="<?php echo"$edu" ?>" />
-					<br />
-					<label for="lives">Lives In:</label>
-						<input type="text" name="liveCity" id="liveCity" value="<?php echo"$liveCity" ?>" />
-						<input type="text" name="liveState" id="liveState" value="<?php echo"$liveState" ?>" />
-					<br />
-					<label for="from">From:</label>
-						<input type="text" name="fromCity" id="fromCity" value="<?php echo"$fromCity" ?>" />
-						<input type="text" name="fromState" id="fromState" value="<?php echo"$fromState" ?>" />
-					<br />
-					<select name="relationship">
-						<option> ---Select One---</option>
-						<option value="single">Single</option>
-						<option value="dating">Dating</option>
-						<option value="married">Married</option>
-						<option value="discerning">Discerning</option>
-					</select>
-					<br />
+					<table>
+						<tr>
+							<td>Work:</td>
+							<td><input type="text" name="work" id="work" value="<?php echo"$work" ?>" /></td>
+						</tr>
+						<tr>
+							<td>Education:</td>
+							<td><input type="text" name="edu" id="edu" value="<?php echo"$edu" ?>" /></td>
+						</tr>
+						<tr>
+							<td>Lives In:</td>
+							<td><input type="text" name="liveCity" id="liveCity" value="<?php echo"$liveCity" ?>" />
+							<input type="text" name="liveState" id="liveState" value="<?php echo"$liveState" ?>" /></td>
+						</tr>
+						<tr>
+							<td>From:</td>
+							<td><input type="text" name="fromCity" id="fromCity" value="<?php echo"$fromCity" ?>" />
+							<input type="text" name="fromState" id="fromState" value="<?php echo"$fromState" ?>" /></td>
+						</tr>
+						<tr>
+							<td>Relationship:</td>
+							<td><select name="relationship">
+								<option> ---Select One---</option>
+								<option value="single">Single</option>
+								<option value="dating">Dating</option>
+								<option value="married">Married</option>
+								<option value="discerning">Discerning</option>
+							</select></td>
+						</tr>
+					</table>
 					<input type="submit" value="Submit">
 				</fieldset>
 			</div>
