@@ -43,14 +43,24 @@
 	}
 
 	// Obtain 5 most recent messages
-	$query = 'select message, date from messages where user_id = ? or user_id in (select user2 from friends where user1 = ?) order by date desc limit 20';
+	$query = 'select message, date,
+		(select fname from users where id = user_id) as fname,
+		(select lname from users where id = user_id) as lname
+		from messages where user_id = ?
+		or user_id in (select user2 from friends where user1 = ?)
+		order by date desc
+		limit 20';
 	$prep_query = $db->prepare($query);
 	$prep_query->bind_param('ii', $id, $id);
 	if ($prep_query->execute()) {
-		$prep_query->bind_result($message, $date);
-		while ($prep_query->fetch()) {
-			echo "<pre>$message $date</pre>";
-		}
+		$prep_query->bind_result($message, $date, $fname, $lname); ?>
+		<h2>News Feed</h2>
+		<fieldset>
+			<?php while ($prep_query->fetch()) {
+				echo "<pre>$fname $lname --- $date --- $message</pre>";
+			} ?>
+		</fieldset>
+<?php
 	}
 	else {
 		die('Failed to execute query');
