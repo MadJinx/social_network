@@ -22,14 +22,6 @@
 			Search for Members you know:
 			<table>
 				<tr>
-					<td>First Name:</td>
-					<td><input type="text" name="first" id="first"/></td>
-				</tr>
-				<tr>
-					<td>Last Name:</td>
-					<td><input type="text" name="last" id="last"/></td>
-				</tr>
-				<tr>
 					<td>Email:</td>
 					<td><input type="text" name="email" id="email"/></td>
 				</tr>
