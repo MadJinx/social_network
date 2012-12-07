@@ -26,6 +26,10 @@ ul {
 	padding:0;
 }
 
+body {
+	background-image:url('images/bg.jpg');
+}
+
 #m {
 	display:none;
 }
