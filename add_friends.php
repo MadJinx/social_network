@@ -33,7 +33,7 @@
 
 	while ($row = $results->fetch_assoc()) {
 		$id2 = $row['user2'];
-		if (!in_array($id2, $_POST['friends'])) {
+		if (!in_array($id2, (array) $_POST['friends'])) {
 			$prep_stmt->bind_param('i', $id2);
 			if (!$prep_stmt->execute()) {
 				die("Could not delete user with id $id2");
@@ -46,7 +46,7 @@
 	$stmt = 'insert into friends values(?, ?)';
 	$prep_stmt = $db->prepare($stmt);
 
-	foreach ($_POST['friends'] as $id2) {
+	foreach ((array) $_POST['friends'] as $id2) {
 		$prep_stmt->bind_param('ii', $id, $id2);
 
 		if (!$prep_stmt->execute()) {

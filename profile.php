@@ -138,12 +138,6 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 			<p>Status History</p>
 			<fieldset>
 				<?php
-					// Connect to DB
-					$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-					if (mysqli_connect_errno()) {
-						die('Failed to connect to database. Try again later.');
-					}
-
 					// Obtain session user's id
 					$query = 'select id from users where email = ?';
 					$prep_query = $db->prepare($query);

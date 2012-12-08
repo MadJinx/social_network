@@ -109,5 +109,7 @@ function create_images($img_name){
 	// Clean up
 	imagedestroy($image);
 	imagedestroy($new);
+
+	return "$img_name.jpg";
 }
 ?>

@@ -27,19 +27,15 @@
 		die('Failed to execute query');
 	}
 
-	$db->close();
-
 	// Call create image function from common.php
-	create_images($id);
-	common_header();
+	$img_name = create_images($id);
+	$stmt = 'update users set image = ? where id = ?';
+	$prep_stmt = $db->prepare($stmt);
+	$prep_stmt->bind_param('ss', $img_name, $id);	
+	if (!$prep_stmt->execute()) {
+		die('Unable to update profile picture');
+	}
 
+	$db->close();
+	header('Location: profile.php');
 ?>
-	<title>Upload Test</title>
-</head>
-<body>
-	<div>
-		<p>Go to the images folder and see if the upload worked.</p>
-		<p><a href="profile.php">Back to Profile</a></p>
-	</div>
-</body>
-</html>
