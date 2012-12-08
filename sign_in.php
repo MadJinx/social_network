@@ -67,5 +67,17 @@
 			</fieldset>
 		</form>
 	</div>
+
+	<?php if (isset($_GET['error'])) { 
+		if ($_GET['error'] == 'userExists') { ?>
+			<script>
+				alert("AAAAH! Don't do that!");
+			</script>
+	<?php } else { ?>
+			<script>
+				alert("YOU FAIL!!!");
+			</script>
+		<?php }
+	} ?>
 </body>
 </html>
