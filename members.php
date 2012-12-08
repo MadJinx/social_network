@@ -45,7 +45,7 @@
 								select id from users where email = '$email'))) as friend from users where email like '%$search%'";
 				}
 				else {
-					$query = "select fname, lname, email, id, (
+					$query = "select fname, lname, email, id, liveCity, liveState, fromCity, fromState, image,  (
 						select id in (
 							select user2 from friends where user1 = (
 								select id from users where email = '$email'))) as friend from users";
@@ -59,12 +59,26 @@
 				while ($row = $results->fetch_assoc()) {
 					if ($row['email'] != $_SESSION['user']) {
 						$id = $row['id'];
+						$email = $row['email'];
 						$fname = $row['fname'];
 						$lname = $row['lname'];
+						$liveCity = $row['liveCity'];
+						$liveState = $row['liveState'];
+						$fromCity = $row['liveCity'];
+						$fromState = $row['liveState'];
+						$image = $row['image'];
 						$checked = $row['friend'] ? 'checked' : '';
 						$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
-						echo "<p>$fname $lname $checkbox</p>";
 						++$count;
+			?>
+					<?php addProfile($email, $fname, $lname, "$liveCity, $liveState", "$fromCity, $fromState", $image); ?>
+					<td>
+						<input type="submit" class='block' value="Go to Profile"/>
+						<input type='checkbox' name='friends[]' value='$id' $checked>Friends</input>
+					</td>
+					</tr></table></div></form>
+						
+			<?php
 					}
 				}
 
