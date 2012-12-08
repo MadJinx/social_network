@@ -28,7 +28,8 @@
 			<input type="submit" value="Search"/>
 		</form>
 
-		<form method="post" action="add_friends.php">
+		<form method="post" action="add_friends.php" id='friend_form'>
+		</form>
 			<?php
 				$db = getDatabaseHandle();
 
@@ -39,33 +40,39 @@
 				else {
 					$search = '%';
 				}
-				$query = "select fname, lname, email, id, (
+				$query = "select fname, lname, email, id, liveCity, liveState, fromCity, fromState, image, ( 
 					select id in (
 						select user2 from friends where user1 = (
 							select id from users where email = ?))) as friend from users where email like ? and email <> ?";
 				$prep_query = $db->prepare($query);
 				$prep_query->bind_param('sss', $user, $search, $user);
 				$prep_query->execute();
-				$prep_query->bind_result($fname, $lname, $email, $id, $is_friend);
+				$prep_query->bind_result($fname, $lname, $email, $id, $liveCity, $liveState, $fromCity, $fromState, $image, $is_friend);
 
 				$count = 0;
 				while ($prep_query->fetch()) {
 					$checked = $is_friend ? 'checked' : '';
 					$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
-					echo "<p>$fname $lname $checkbox</p>";
-					++$count;
+					++$count; ?>
+					<form action="profile.php" method="post">
+					<?php addProfile($email, $fname, $lname, "$liveCity, $liveState", "$fromCity, $fromState", $image); ?>
+					<td>
+						<input type="submit" class='block' value="Go to Profile"/>
+						<input type='checkbox' form='friend_form' name='friends[]' value=<?php echo "'$id' $checked" ?>>Friends</input>
+					</td>
+					</tr></table></div></form>
+			<?php
 				}
 
 				if ($count == 0) {
 					echo "<p>No Members Found</p>";
 				}
 				else {
-					echo "<input type='submit' value='Save'/>";
+					echo "<input type='submit' form='friend_form' value='Save'/>";
 				}
 
 				$prep_query->close();
 				$db->close();
 			?>
-		</form>
 	</body>
 </html>

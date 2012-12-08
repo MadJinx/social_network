@@ -18,18 +18,7 @@
 
 		<?php
 			$db = getDatabaseHandle();
-
-			$query = 'select id from users where email = ?';
-			$prep_query = $db->prepare($query);
-			$prep_query->bind_param('s', $_SESSION['user']);
-			if ($prep_query->execute()) {
-				$prep_query->bind_result($id);
-				$prep_query->fetch();
-				$prep_query->close();
-			}
-			else {
-				die('Failed to execute query');
-			}
+			$id = getUserId($db);
 			
 			$query = "select user2 from friends where user1 = $id";
 			$results = $db->query($query);
@@ -47,13 +36,14 @@
 					$prep_query->bind_result($fname, $lname, $email, $liveCity, $liveState, $fromCity, $fromState, $image);
 					$prep_query->fetch();
 		?>
-					<form action="unfriend.php" method="post" id='friend_form'>
-						<input type='hidden' name='user2' value='<?php echo $id2?>'/>
+					<form action="unfriend.php" method="post" id='friend_form<?php echo $id2 ?>'>
+						<input type='hidden' name='user2' value='<?php echo $id2 ?>'/>
 					</form>
+					<form action="profile.php" method="post">
 					<?php addProfile($email, $fname, $lname, "$liveCity, $liveState", "$fromCity, $fromState", $image); ?>
 					<td>
 						<input type="submit" class='block' value="Go to Profile"/>
-						<input type='submit' class='block' form='friend_form' value='Unfriend'/>
+						<input type='submit' class='block' form='friend_form<?php echo $id2 ?>' value='Unfriend'/>
 					</td>
 					</tr></table></div></form>
 		<?php

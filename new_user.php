@@ -1,16 +1,13 @@
 <?php
 	session_start();
+	include_once("common.php");
 
 	$fname = $_POST['fname'];
 	$lname = $_POST['lname'];
 	$email = $_POST['email'];
 	$pass  = $_POST['password'];
 
-	// Connect to DB
-	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-	if (mysqli_connect_errno()) {
-		die('Failed to connect to database. Try again later.');
-	}
+	$db = getDatabaseHandle();
 
 	// Check if user exists with provided email
 	$query = 'select * from users where email = ?';

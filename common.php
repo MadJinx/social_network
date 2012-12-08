@@ -35,7 +35,6 @@ function addMenu() { ?>
 }
 
 function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
-	<form action="profile.php" method="post">
 		<div class="profiles">
 			<table>
 				<tr>
@@ -77,13 +76,21 @@ function getFriendIds($db, $user_id) {
 	return $friend_ids;
 }
 
-function unfriendUsers($db, $prev_friend_ids, $new_friend_ids) {
-	$stmt = 'delete from friends where user2 = ?';
+function unfriendUser($db, $id, $friend_id) {
+	$stmt = 'delete from friends where user1 = ? and user2 = ?';
+	$prep_stmt = $db->prepare($stmt);
+	$prep_stmt->bind_param('ii', $id, $friend_id);
+	$prep_stmt->execute();
+	$prep_stmt->close();
+}
+
+function unfriendUsers($db, $id, $prev_friend_ids, $new_friend_ids) {
+	$stmt = 'delete from friends where user1 = ? and user2 = ?';
 	$prep_stmt = $db->prepare($stmt);
 
 	foreach ($prev_friend_ids as $prev) {
 		if (!in_array($prev, (array) $new_friend_ids)) {
-			$prep_stmt->bind_param('i', $prev);
+			$prep_stmt->bind_param('ii', $id, $prev);
 			if (!$prep_stmt->execute()) {
 				die("Could not delete user with id $prev");
 			}

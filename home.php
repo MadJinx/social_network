@@ -23,24 +23,8 @@
 		</form>
 
 <?php
-	// Connect to DB
-	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-	if (mysqli_connect_errno()) {
-		die('Failed to connect to database. Try again later.');
-	}
-
-	// Obtain session user's id
-	$query = 'select id from users where email = ?';
-	$prep_query = $db->prepare($query);
-	$prep_query->bind_param('s', $_SESSION['user']);
-	if ($prep_query->execute()) {
-		$prep_query->bind_result($id);
-		$prep_query->fetch();
-		$prep_query->close();
-	}
-	else {
-		die('Failed to execute query');
-	}
+	$db = getDatabaseHandle();
+	$id = getUserId($db);
 
 	// Obtain 20 most recent messages
 	$messages = array();

@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	include_once("common.php");
+
 	$work = $_POST['work'];
 	$edu = $_POST['edu'];
 	$liveCity = $_POST['liveCity'];
@@ -11,11 +13,9 @@
 			$relationship = 'Single';
 	}
 	$email = $_SESSION['user'];
-	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-	if (mysqli_connect_errno()) {
-		die('Failed to connect to database. Try again later.');
-	}
 	
+	$db = getDatabaseHandle();
+
 	$query = 'update users set work = ?, edu = ?, liveCity = ?, liveState = ?, fromCity = ?, fromState = ?, relationship = ? where email = ?';
 	$stmt  = $db->prepare($query);
 	if (!$stmt) {

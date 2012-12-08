@@ -19,24 +19,10 @@
 		$_SESSION['profile'] = $_POST['uname'];
 	}
 ?>
-<!--
-DONE	Display the last 5 status updates made by the user that belongs to the profile
-DONE	Display the information of the user who the profile belongs to
-DONE	If the profile page belongs to the current user, then give them an option to edit the page
-DONE	Some logo or simple site description
-DONE	A menu that allows users to navigate to their profile or any other that they have access to on the site (home, help, about, contact, etc..) in addition to allowing them to logout
-		Any additional features that fit on a social network's profile page are encouraged but not required 
-		Add profile picture
--->
-
-
 
 <?php
 	$email = $_SESSION['profile'];
-	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-	if (mysqli_connect_errno()) {
-		die('Failed to connect to database. Try again later.');
-	}
+	$db = getDatabaseHandle();
 
 	$query = 'select email, work, edu, liveCity, liveState, fromCity, fromState, relationship, image from users';
 	$result = $db->query($query);
@@ -145,27 +131,28 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 			<p>Status History</p>
 			<fieldset>
 				<?php
-					// Obtain session user's id
-					$query = 'select id from users where email = ?';
-					$prep_query = $db->prepare($query);
-					$prep_query->bind_param('s', $_SESSION['profile']);
-					if ($prep_query->execute()) {
-						$prep_query->bind_result($id);
-						$prep_query->fetch();
-						$prep_query->close();
-					}
-					else {
-						die('Failed to execute query');
-					}
+					$id = getUserId($db);
 
 					// Obtain 5 most recent messages
-					$query = 'select message, date from messages where user_id = ? order by date desc limit 5';
+					$messages = array();
+					$query = 'select message, date, id,
+						(select fname from users where id = user_id) as fname,
+						(select lname from users where id = user_id) as lname
+						from messages where user_id = ?
+						order by date desc
+						limit 5';
 					$prep_query = $db->prepare($query);
-					$prep_query->bind_param('s', $id);
+					$prep_query->bind_param('i', $id);
 					if ($prep_query->execute()) {
-						$prep_query->bind_result($message, $date);
+						$prep_query->bind_result($message, $date, $m_id, $fname, $lname);
 						while ($prep_query->fetch()) {
-							echo "<pre>$date --- $message</pre>";
+							$tmp = array();
+							$tmp['fname'] = $fname;
+							$tmp['lname'] = $lname;
+							$tmp['date'] = $date;
+							$tmp['message'] = $message;
+							$tmp['m_id'] = $m_id;
+							$messages[] = $tmp;
 						}
 					}
 					else {
@@ -173,6 +160,45 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 					}
 
 					$prep_query->close();
+
+					$comment_query = 'select comment, date,
+						(select fname from users where id = user_id) as fname,
+						(select lname from users where id = user_id) as lname
+						from comments where message_id = ?
+						order by date desc';
+					$prep_comment_query = $db->prepare($comment_query);
+
+					echo "<ul>";
+					foreach ($messages as $row) {
+						echo "<li>";
+						echo "<form method='post' action='post.php'>";
+							$fname = $row['fname'];
+							$lname = $row['lname'];
+							$message = $row['message'];
+							$date = $row['date'];
+							$m_id = $row['m_id'];
+
+							echo "<input type='hidden' name='message_id' value='$m_id'/>";
+							echo "<pre><strong>$fname $lname --- $date</strong>\n$message</pre>";
+							
+							echo "<ul>";
+							$prep_comment_query->bind_param('i', $m_id);
+							$prep_comment_query->execute();
+							$prep_comment_query->bind_result($comment, $c_date, $c_fname, $c_lname);
+							while ($prep_comment_query->fetch()) {
+								echo "<li>";
+								echo "<pre><strong>$c_fname $c_lname --- $c_date</strong>\n$comment</pre>";
+								echo "</li>";
+							}
+							echo "<textarea class='inline' name='comment' rows='1' cols='80' placeholder='Comment...'></textarea>";
+							echo "<input class='vert_center buffer' type=submit value='Post'/>";
+						echo "</ul>";
+						echo "</form>";
+						echo "</li>";
+					}
+					echo "</ul>";
+					
+					$prep_comment_query->close();
 					$db->close();
 				?>
 			</fieldset>
