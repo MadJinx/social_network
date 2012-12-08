@@ -56,7 +56,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<?php addMenu(); ?>
 		<h1>Welcome to your profile page</h1>
 		<div>
-			<p>You are logged in as <?= $_SESSION['user']."." ?></p>
+			<h4>You are logged in as <?= $_SESSION['user']."." ?></h4>
 			
 			<!-- need to change the second part of the condition -->
 			<?php if ( $_SESSION['user'] == $_SESSION['profile'] ){ ?>

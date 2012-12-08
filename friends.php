@@ -42,18 +42,18 @@
 				die('Invalid query');
 			}
 
-			$query = 'select fname, lname from users where id = ?';
+			$query = 'select fname, lname, email, liveCity, liveState, fromCity, fromState, image from users where id = ?';
 			$prep_query = $db->prepare($query);
 			while ($row = $results->fetch_assoc()) {
 				$id2 = $row['user2'];
 				$prep_query->bind_param('i', $id2);
 				if ($prep_query->execute()) {
-					$prep_query->bind_result($fname, $lname);
+					$prep_query->bind_result($fname, $lname, $email, $liveCity, $liveState, $fromCity, $fromState, $image);
 					$prep_query->fetch();
 		?>
 					<form action="unfriend.php" method="post" id='friend_form'>
 						<p>
-							<?php addProfile('unknown', $fname, $lname, 'unknown', 'unknown', 'frown.jpg'); ?>
+							<?php addProfile($email, $fname, $lname, "$liveCity, $liveState", "$fromCity, $fromState", $image); ?>
 							<input type='hidden' name='user2' value='<?php echo $id2?>'/>
 							<input type='submit' value='Unfriend'/>
 						</p>
