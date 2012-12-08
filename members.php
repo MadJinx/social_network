@@ -16,7 +16,6 @@
 		<?php addMenu(); ?>
 
 		<h1>Welcome to the Members Page</h1>
-		<h2>Befriend members by checking the checkbox next to their name and pressing the 'Save' button.</h2>
 
 		<form method="get" action="members.php" id="search">
 			Search for Members you know:
