@@ -27,12 +27,16 @@ function addMenu() { ?>
 			<li><img src="images/logout.png" alt="logout" onClick="warp('logout');" title="LOGOUT"/></li>
 		</ul>
 	</div>
+<?php
+	addHeader();
+}
+
+function addHeader() { ?>
 	<div id="logo">
 		<img src="images/pen.png" alt="pen"/>
 		<h1>Bad Pen Social<h1>
 	</div>
-<?php
-}
+<?php }
 
 function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 		<div class="profiles">

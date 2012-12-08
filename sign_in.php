@@ -17,6 +17,7 @@
 <title>Welcome Page</title>
 </head>
 <body>
+	<?php addHeader(); ?>
 	<div>
 		<h3>Log In</h3>
 		<form action="user_check.php" method="post">
