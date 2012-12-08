@@ -1,3 +1,6 @@
+.border {
+	border: 4px solid black;
+}
 
 #logo img {
 	width:3em;

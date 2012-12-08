@@ -29,14 +29,14 @@
 
 	while ($row = $result->fetch_assoc()){
 		if ($row['email'] == $email) {
-			$work = $row['work'];
-			$edu = $row['edu'];
-			$liveCity = $row['liveCity'];
-			$liveState = $row['liveState'];
-			$fromCity = $row['fromCity'];
-			$fromState = $row['fromState'];
-			$relationship = $row['relationship'];
-			$image = $row['image'];
+			$work = htmlspecialchars($row['work']);
+			$edu = htmlspecialchars($row['edu']);
+			$liveCity = htmlspecialchars($row['liveCity']);
+			$liveState = htmlspecialchars($row['liveState']);
+			$fromCity = htmlspecialchars($row['fromCity']);
+			$fromState = htmlspecialchars($row['fromState']);
+			$relationship = htmlspecialchars($row['relationship']);
+			$image = htmlspecialchars($row['image']);
 		}
 	}
 	$result->free();
@@ -48,7 +48,7 @@
 		<?php addMenu(); ?>
 		<h1>Welcome to Yo' Profile</h1>
 		<div>
-			<h4>You are logged in as <?= $_SESSION['profile']."." ?></h4>
+			<h4>You are logged in as <?= htmlspecialchars($_SESSION['profile'])."." ?></h4>
 			
 			<!-- need to change the second part of the condition -->
 			<?php if ( $_SESSION['profile'] == $_SESSION['user'] ){ ?>
@@ -116,7 +116,7 @@
 			</form>
 		</div>
 		<div>
-			<img src=<?php echo "images/$image"; ?> alt='profile image'/>
+			<img class='border' src=<?php echo "images/$image"; ?> alt='profile image'/>
 			<?php if ( $_SESSION['profile'] == $_SESSION['user'] ){ ?>
 				<form action="upload_test.php" method="post" name="upload_image" enctype="multipart/form-data">
 					<fieldset>
@@ -179,7 +179,7 @@
 							$m_id = $row['m_id'];
 
 							echo "<input type='hidden' name='message_id' value='$m_id'/>";
-							echo "<pre><strong>$fname $lname --- $date</strong>\n$message</pre>";
+							echo "<pre><strong>".htmlspecialchars("$fname $lname --- $date")."</strong>\n".htmlspecialchars($message)."</pre>";
 							
 							echo "<ul>";
 							$prep_comment_query->bind_param('i', $m_id);
@@ -187,7 +187,7 @@
 							$prep_comment_query->bind_result($comment, $c_date, $c_fname, $c_lname);
 							while ($prep_comment_query->fetch()) {
 								echo "<li>";
-								echo "<pre><strong>$c_fname $c_lname --- $c_date</strong>\n$comment</pre>";
+								echo "<pre><strong>".htmlspecialchars("$c_fname $c_lname --- $c_date")."</strong>\n".htmlspecialchars($comment)."</pre>";
 								echo "</li>";
 							}
 							echo "<textarea class='inline' name='comment' rows='1' cols='80' placeholder='Comment...'></textarea>";

@@ -70,11 +70,11 @@
 	<?php if (isset($_GET['error'])) { 
 		if ($_GET['error'] == 'userExists') { ?>
 			<script>
-				alert("AAAAH! Don't do that!");
+				alert("Error: User Exists. Please use different email.");
 			</script>
 	<?php } else { ?>
 			<script>
-				alert("YOU FAIL!!!");
+				alert("Error: Username/Password pair invalid.");
 			</script>
 		<?php }
 	} ?>

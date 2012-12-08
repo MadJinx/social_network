@@ -39,14 +39,14 @@ function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 			<table>
 				<tr>
 					<td>
-						<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
+						<img class='border' src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
 					</td>
 					<td>
 						<input type='hidden' name='uname' value="<?php echo $uname ?>"/>
-						<h4><?php echo $uname; ?></h4>
-						<p><?php echo "$fname $lname"; ?></p>
-						<h5>Lives in <?php echo $lives; ?></h5>
-						<h5>From <?php echo $from; ?></h5>
+						<h4><?php echo htmlspecialchars($uname); ?></h4>
+						<p><?php echo htmlspecialchars("$fname $lname"); ?></p>
+						<h5>Lives in <?php echo htmlspecialchars($lives); ?></h5>
+						<h5>From <?php echo htmlspecialchars($from); ?></h5>
 					</td>
 <?php }
 

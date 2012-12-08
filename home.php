@@ -15,7 +15,7 @@
 	<body>
 		<?php addMenu(); ?>
 		<h1>Home Base</h1>
-		<form action='post.php' method='post'>
+		<form action='post.php' method='post' onsubmit='return validateInputField(document.getElementById("message"));' >
 			<fieldset>
 				<textarea id='message' name='message' rows='4' cols='80' maxlength='255' placeholder="Anything you'd like to share today?"></textarea>
 				<input type='submit' value='Post'/>
@@ -76,7 +76,7 @@
 				$m_id = $row['m_id'];
 
 				echo "<input type='hidden' name='message_id' value='$m_id'/>";
-				echo "<pre><strong>$fname $lname --- $date</strong>\n$message</pre>";
+				echo "<pre><strong>".htmlspecialchars("$fname $lname --- $date")."</strong>\n".htmlspecialchars($message)."</pre>";
 				
 		echo "<ul>";
 				$prep_comment_query->bind_param('i', $m_id);
@@ -84,10 +84,10 @@
 				$prep_comment_query->bind_result($comment, $c_date, $c_fname, $c_lname);
 				while ($prep_comment_query->fetch()) {
 			echo "<li>";
-			echo "<pre><strong>$c_fname $c_lname --- $c_date</strong>\n$comment</pre>";
+			echo "<pre><strong>".htmlspecialchars("$c_fname $c_lname --- $c_date")."</strong>\n".htmlspecialchars($comment)."</pre>";
 			echo "</li>";
 				}
-				echo "<textarea class='inline' name='comment' rows='1' cols='80' placeholder='Comment...'></textarea>";
+				echo "<textarea class='inline' name='comment' rows='1' cols='80' maxlength='255' placeholder='Comment...'></textarea>";
 				echo "<input class='vert_center buffer' type=submit value='Post'/>";
 		echo "</ul>";
 			echo "</form>";
