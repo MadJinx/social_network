@@ -1,3 +1,10 @@
+/*h1, h2, h3, h4, h5, p {
+	text-shadow: 0px 0px 10px white,
+		0px 0px 20px white,
+		0px 0px 20px white,
+		0px 0px 20px white;
+}
+*/
 textarea {
 	resize: none;
 	display: block;
@@ -5,7 +12,7 @@ textarea {
 }
 
 fieldset {
-	background-color: #CCCCEE;
+	background-color: #AACCFF;
 }
 
 #nuser {
@@ -28,6 +35,10 @@ ul {
 
 body {
 	background-image:url('images/bg.jpg');
+	text-shadow: 0px 0px 10px white,
+		0px 0px 10px white,
+		0px 0px 20px white,
+		0px 0px 20px white;
 }
 
 #m {

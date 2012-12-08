@@ -66,23 +66,23 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<div>
 			<table>
 				<tr>
-					<td>Work:</td>
+					<td><strong>Work:</strong></td>
 					<td><?php echo"$work" ?></td>
 				</tr>
 				<tr>
-					<td>Education:</td>
+					<td><strong>Education:</strong></td>
 					<td><?php echo"$edu" ?></td>
 				</tr>
 				<tr>
-					<td>Lives In:</td>
+					<td><strong>Lives In:</strong></td>
 					<td><?php echo"$liveCity" ?>, <?php echo"$liveState" ?></td>
 				</tr>
 				<tr>
-					<td>From:</td>
+					<td><strong>From:</strong></td>
 					<td><?php echo"$fromCity" ?>, <?php echo"$fromState" ?></td>
 				</tr>
 				<tr>
-					<td>Relationship:</td>
+					<td><strong>Relationship:</strong></td>
 					<td><?php echo"$relationship" ?></td>
 				</tr>
 			</table>
