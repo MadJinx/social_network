@@ -56,7 +56,7 @@
 							$lname = $row['lname'];
 							$checked = $row['friend'] ? 'checked' : '';
 							$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
-							echo "<p>$fname $lname $checkbox</p>";
+							echo "<p>$fname $lname $checkbox </p>";
 							++$count;
 						}
 					}
