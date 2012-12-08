@@ -12,8 +12,11 @@
 	common_header();
 	
 	//need to set to the person's page we view. 
-	if(!(isset($_SESSION['profile']))){
+	if(!(isset($_POST['uname']))){
 		$_SESSION['profile'] = $_SESSION['user'];
+	}
+	else {
+		$_SESSION['profile'] = $_POST['uname'];
 	}
 ?>
 <!--
@@ -29,7 +32,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 
 
 <?php
-	$email = $_SESSION['user'];
+	$email = $_SESSION['profile'];
 	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
 	if (mysqli_connect_errno()) {
 		die('Failed to connect to database. Try again later.');
@@ -59,10 +62,10 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		<?php addMenu(); ?>
 		<h1>Welcome to Yo' Profile</h1>
 		<div>
-			<h4>You are logged in as <?= $_SESSION['user']."." ?></h4>
+			<h4>You are logged in as <?= $_SESSION['profile']."." ?></h4>
 			
 			<!-- need to change the second part of the condition -->
-			<?php if ( $_SESSION['user'] == $_SESSION['profile'] ){ ?>
+			<?php if ( $_SESSION['profile'] == $_SESSION['user'] ){ ?>
 				<input type="button" id="edit" value="Edit" onClick="toggleVis('edit_info');" />
 			<?php } ?>
 		</div>
@@ -143,7 +146,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 					// Obtain session user's id
 					$query = 'select id from users where email = ?';
 					$prep_query = $db->prepare($query);
-					$prep_query->bind_param('s', $_SESSION['user']);
+					$prep_query->bind_param('s', $_SESSION['profile']);
 					if ($prep_query->execute()) {
 						$prep_query->bind_result($id);
 						$prep_query->fetch();

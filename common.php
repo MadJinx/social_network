@@ -35,7 +35,7 @@ function addMenu() { ?>
 }
 
 function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
-	<form id="gopage" action="go_to_page.php" method="post">
+	<form action="profile.php" method="post">
 		<div class="profiles">
 			<table>
 				<tr>
@@ -43,7 +43,8 @@ function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 						<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
 					</td>
 					<td>
-						<h4 name="uname"><?php echo $uname; ?></h4>
+						<input type='hidden' name='uname' value="<?php echo $uname ?>"/>
+						<h4><?php echo $uname; ?></h4>
 						<p><?php echo "$fname $lname"; ?></p>
 						<h5>Lives in <?php echo $lives; ?></h5>
 						<h5>From <?php echo $from; ?></h5>
