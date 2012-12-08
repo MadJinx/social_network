@@ -17,11 +17,7 @@
 		<h1>Bad PenPals</h1>
 
 		<?php
-			// Connect to DB
-			$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-			if (mysqli_connect_errno()) {
-				die('Failed to connect to database. Try again later.');
-			}
+			$db = getDatabaseHandle();
 
 			$query = 'select id from users where email = ?';
 			$prep_query = $db->prepare($query);

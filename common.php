@@ -19,7 +19,7 @@ function addMenu() { ?>
 	<div class="menu imen" onClick="toggleVis('m');">Menu</div>
 	<div class="menu" id="m">
 		<div class="imen" onClick="toggleVis('m');">Menu</div>
-		<ul>
+		<ul class='unpad_list'>
 			<li><img src="images/home.png" alt="home" onClick="warp('home');" title="HOME"/></li>
 			<li><img src="images/profile.png" alt="profile" onClick="warp('profile');" title="PROFILE"/></li>
 			<li><img src="images/friends.png" alt="friends" onClick="warp('friends');" title="PENPALS"/></li>
@@ -50,6 +50,75 @@ function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 						<h5>From <?php echo $from; ?></h5>
 					</td>
 <?php }
+
+function getDatabaseHandle() {
+	// Connect to DB
+	$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
+	if (mysqli_connect_errno()) {
+		die('Failed to connect to database. Try again later.');
+	}
+
+	return $db;
+}
+
+function getFriendIds($db, $user_id) {
+	$query = "select user2 from friends where user1 = $user_id";
+	$results = $db->query($query);
+	if (!$results) {
+		die('Invalid query');
+	}
+
+	$friend_ids = array();
+
+	while ($row = $results->fetch_assoc()) {
+		$friend_ids[] = $row['user2'];
+	}
+
+	return $friend_ids;
+}
+
+function unfriendUsers($db, $prev_friend_ids, $new_friend_ids) {
+	$stmt = 'delete from friends where user2 = ?';
+	$prep_stmt = $db->prepare($stmt);
+
+	foreach ($prev_friend_ids as $prev) {
+		if (!in_array($prev, (array) $new_friend_ids)) {
+			$prep_stmt->bind_param('i', $prev);
+			if (!$prep_stmt->execute()) {
+				die("Could not delete user with id $prev");
+			}
+		}
+	}
+	$prep_stmt->close();
+}
+
+function befriendUsers($db, $id, $friend_ids) {
+	// Add new friendships to DB
+	$stmt = 'insert into friends values(?, ?)';
+	$prep_stmt = $db->prepare($stmt);
+
+	foreach ((array) $friend_ids as $id2) {
+		$prep_stmt->bind_param('ii', $id, $id2);
+		$prep_stmt->execute();
+	}
+	$prep_stmt->close();
+}
+
+function getUserId($db) {
+	$query = 'select id from users where email = ?';
+	$prep_query = $db->prepare($query);
+	$prep_query->bind_param('s', $_SESSION['user']);
+	if ($prep_query->execute()) {
+		$prep_query->bind_result($id);
+		$prep_query->fetch();
+		$prep_query->close();
+	}
+	else {
+		die('Failed to execute query');
+	}
+
+	return $id;
+}
 
 /*
 *  This function takes an uploaded image, resizes it, converts it to .jpg and stores it in a designated location

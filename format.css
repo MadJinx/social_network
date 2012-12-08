@@ -31,7 +31,7 @@ fieldset {
 	border: 2px solid black;
 }
 
-ul {
+.unpad_list {
 	list-style-type:none;
 	margin-left: 6px;
 	padding:0;
@@ -77,4 +77,16 @@ body {
 .block {
 	display: block;
 	width: 100px;
+}
+
+.inline {
+	display: inline;
+}
+
+.vert_center {
+	vertical-align: 50%;
+}
+
+.buffer {
+	margin: 3px;
 }

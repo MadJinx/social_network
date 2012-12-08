@@ -30,42 +30,30 @@
 
 		<form method="post" action="add_friends.php">
 			<?php
-				// Connect to DB
-				$db = new mysqli('localhost', 'team09', 'maroon', 'team09');
-				if (mysqli_connect_errno()) {
-					die('Failed to connect to database. Try again later.');
-				}
+				$db = getDatabaseHandle();
 
-				$email = $_SESSION['user'];
+				$user = $_SESSION['user'];
 				if (isset($_GET['email'])) {
-					$search = $_GET['email'];
-					$query = "select fname, lname, email, id, (
-						select id in (
-							select user2 from friends where user1 = (
-								select id from users where email = '$email'))) as friend from users where email like '%$search%'";
+					$search = '%'.$_GET['email'].'%';
 				}
 				else {
-					$query = "select fname, lname, email, id, (
-						select id in (
-							select user2 from friends where user1 = (
-								select id from users where email = '$email'))) as friend from users";
+					$search = '%';
 				}
-				$results = $db->query($query);
-				if (!$results) {
-					die('Invalid query ' + mysqli_error());
-				}
+				$query = "select fname, lname, email, id, (
+					select id in (
+						select user2 from friends where user1 = (
+							select id from users where email = ?))) as friend from users where email like ? and email <> ?";
+				$prep_query = $db->prepare($query);
+				$prep_query->bind_param('sss', $user, $search, $user);
+				$prep_query->execute();
+				$prep_query->bind_result($fname, $lname, $email, $id, $is_friend);
 
 				$count = 0;
-				while ($row = $results->fetch_assoc()) {
-					if ($row['email'] != $_SESSION['user']) {
-						$id = $row['id'];
-						$fname = $row['fname'];
-						$lname = $row['lname'];
-						$checked = $row['friend'] ? 'checked' : '';
-						$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
-						echo "<p>$fname $lname $checkbox</p>";
-						++$count;
-					}
+				while ($prep_query->fetch()) {
+					$checked = $is_friend ? 'checked' : '';
+					$checkbox = "<input type='checkbox' name='friends[]' value='$id' $checked/>";
+					echo "<p>$fname $lname $checkbox</p>";
+					++$count;
 				}
 
 				if ($count == 0) {
@@ -75,7 +63,7 @@
 					echo "<input type='submit' value='Save'/>";
 				}
 
-				$results->close();
+				$prep_query->close();
 				$db->close();
 			?>
 		</form>

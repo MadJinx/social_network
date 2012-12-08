@@ -42,8 +42,10 @@
 		die('Failed to execute query');
 	}
 
-	// Obtain 5 most recent messages
-	$query = 'select message, date,
+	// Obtain 20 most recent messages
+	$messages = array();
+
+	$query = 'select message, date, id,
 		(select fname from users where id = user_id) as fname,
 		(select lname from users where id = user_id) as lname
 		from messages where user_id = ?
@@ -53,22 +55,65 @@
 	$prep_query = $db->prepare($query);
 	$prep_query->bind_param('ii', $id, $id);
 	if ($prep_query->execute()) {
-		$prep_query->bind_result($message, $date, $fname, $lname); ?>
-		<h2>News Feed</h2>
-		<fieldset>
-			<?php while ($prep_query->fetch()) {
-				echo "<pre>$fname $lname --- $date --- $message</pre>";
-			} ?>
-		</fieldset>
-<?php
+		$prep_query->bind_result($message, $date, $m_id, $fname, $lname);
+		while ($prep_query->fetch()) {
+			$tmp = array();
+			$tmp['fname'] = $fname;
+			$tmp['lname'] = $lname;
+			$tmp['date'] = $date;
+			$tmp['message'] = $message;
+			$tmp['m_id'] = $m_id;
+			$messages[] = $tmp;
+		}
 	}
 	else {
 		die('Failed to execute query');
 	}
 
 	$prep_query->close();
+	
+	$comment_query = 'select comment, date,
+		(select fname from users where id = user_id) as fname,
+		(select lname from users where id = user_id) as lname
+		from comments where message_id = ?
+		order by date desc';
+	$prep_comment_query = $db->prepare($comment_query);
+
+	echo '<h2>News Feed</h2>';
+	echo '<fieldset>';
+		echo "<ul>";
+		foreach ($messages as $row) {
+			echo "<li>";
+			echo "<form method='post' action='post.php'>";
+				$fname = $row['fname'];
+				$lname = $row['lname'];
+				$message = $row['message'];
+				$date = $row['date'];
+				$m_id = $row['m_id'];
+
+				echo "<input type='hidden' name='message_id' value='$m_id'/>";
+				echo "<pre><strong>$fname $lname --- $date</strong>\n$message</pre>";
+				
+		echo "<ul>";
+				$prep_comment_query->bind_param('i', $m_id);
+				$prep_comment_query->execute();
+				$prep_comment_query->bind_result($comment, $c_date, $c_fname, $c_lname);
+				while ($prep_comment_query->fetch()) {
+			echo "<li>";
+			echo "<pre><strong>$c_fname $c_lname --- $c_date</strong>\n$comment</pre>";
+			echo "</li>";
+				}
+				echo "<textarea class='inline' name='comment' rows='1' cols='80' placeholder='Comment...'></textarea>";
+				echo "<input class='vert_center buffer' type=submit value='Post'/>";
+		echo "</ul>";
+			echo "</form>";
+			echo "</li>";
+		}
+		echo "</ul>";
+	echo "</fieldset>";
+
+	$prep_comment_query->close();
 	$db->close();
 ?>
-
 	</body>
 </html>
