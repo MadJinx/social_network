@@ -62,7 +62,7 @@
 						<td><input type="password" name="repass" id="repass" /></td>
 					</tr>
 				</table>
-				<input type="submit" value="Register">
+				<input type="submit" value="Register"/>
 			</fieldset>
 		</form>
 	</div>

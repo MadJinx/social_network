@@ -35,21 +35,24 @@ function addMenu() { ?>
 }
 
 function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
-	<div class="profiles">
-		<table>
-			<tr>
-				<td>
-					<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
-				</td>
-				<td>
-					<h4><?php echo $uname; ?></h4>
-					<p><?php echo "$fname $lname"; ?></p>
-					<h5>Lives in <?php echo $lives; ?></h5>
-					<h5>From <?php echo $from; ?></h5>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<form id="gopage" action="go_to_page.php" method="post">
+		<div class="profiles">
+			<table>
+				<tr>
+					<td>
+						<img src="images/<?php echo $pic; ?>" alt="images/<?php echo $pic; ?>">
+					</td>
+					<td>
+						<h4 name="uname"><?php echo $uname; ?></h4>
+						<p><?php echo "$fname $lname"; ?></p>
+						<h5>Lives in <?php echo $lives; ?></h5>
+						<h5>From <?php echo $from; ?></h5>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value="Go to Pofile"/>
+		</div>
+	</form>	
 <?php }
 
 /*

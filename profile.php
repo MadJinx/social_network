@@ -1,3 +1,21 @@
+<?php
+	session_start();
+	
+	// Check to see if the user is logged in. If they are not, then redirect them to the index/login page.
+	if(!(isset($_SESSION['user']))){
+		header("Location: index.php");
+	}
+	
+	// Include the common PHP file
+	include_once("common.php");
+	// Call the common header function.
+	common_header();
+	
+	//need to set to the person's page we view. 
+	if(!(isset($_SESSION['profile']))){
+		$_SESSION['profile'] = $_SESSION['user'];
+	}
+?>
 <!--
 DONE	Display the last 5 status updates made by the user that belongs to the profile
 DONE	Display the information of the user who the profile belongs to
@@ -9,22 +27,6 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 -->
 
 
-
-<?php
-	session_start();
-	
-	// Check to see if the user is logged in. If they are not, then redirect them to the index/login page.
-	if(!(isset($_SESSION['user']))){
-		header("Location: index.php");
-	}
-	// Include the common PHP file
-	include_once("common.php");
-	// Call the common header function.
-	common_header();
-	
-	//need to set to the person's page we view. 
-	$_SESSION['profile'] = $_SESSION['user'];
-?>
 
 <?php
 	$email = $_SESSION['user'];
