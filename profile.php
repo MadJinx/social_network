@@ -33,7 +33,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		die('Failed to connect to database. Try again later.');
 	}
 
-	$query = 'select email, work, edu, liveCity, liveState, fromCity, fromState, relationship from users';
+	$query = 'select email, work, edu, liveCity, liveState, fromCity, fromState, relationship, image from users';
 	$result = $db->query($query);
 
 	while ($row = $result->fetch_assoc()){
@@ -45,6 +45,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 			$fromCity = $row['fromCity'];
 			$fromState = $row['fromState'];
 			$relationship = $row['relationship'];
+			$image = $row['image'];
 		}
 	}
 	$result->free();
@@ -124,13 +125,11 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 			</form>
 		</div>
 		<div>
-			<p>Try uploading an image.</p>
+			<img src=<?php echo "images/$image"; ?> alt='profile image'/>
 			<form action="upload_test.php" method="post" name="upload_image" enctype="multipart/form-data">
 				<fieldset>
-					<label for="upload_image">Pick an image to upload:</label>
+					<label for="upload_image">Pick an image to upload as profile picture:</label>
 						<input type="file" name="upload_image" id="upload_image"/>
-					<label for"img_name">What do you want your image to be called?</label>
-						<input type="text" name="img_name" id="img_name" />
 					<input type="submit" value="Upload" />
 				</fieldset>
 			</form>

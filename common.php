@@ -9,7 +9,6 @@ function common_header(){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="common_style.css" type="text/css" rel="stylesheet" />
 	<script src="functions.js"></script>
 	<link rel="stylesheet" type="text/css" href="format.css">
 <?php
@@ -76,33 +75,6 @@ function create_images($img_name){
     	default:
         	exit('Unsupported type: '.$_FILES['upload_image']['type']);
 	}
-
-	/********************************************************************************
-	This first example creates a small image that is a maximum size of 50 X 50 pixels 
-	********************************************************************************/
-
-	// The maximum dimensions for your new image
-	$max_width = 50;
-	$max_height = 50;
-
-	// The current dimensions for your new image
-	$old_width = imagesx($image);
-	$old_height = imagesy($image);
-
-	// Scale the width and height according to your previous dimensions
-	$scale = min($max_width/$old_width, $max_height/$old_height);
-
-	// Create a new width and height based on the scale
-	$new_width  = ceil($scale*$old_width);
-	$new_height = ceil($scale*$old_height);
-
-	// Actually create the new image
-	$new = imagecreatetruecolor($new_width, $new_height);
-	imagecopyresampled($new, $image, 0, 0, 0, 0, $new_width, $new_height, $old_width, $old_height);
-
-	// Store the image in the "images" directory as image_thumb.jpg. The 90 at the end specifies the quality of the image
-	imagejpeg($new, "images/".$img_name."_thumb.jpg", 90);
-	
 
 	/******************************************************************************* 
 	This example creates a larger image that is a maximum size of 400 X 400 pixels 
