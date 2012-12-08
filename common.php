@@ -49,11 +49,6 @@ function addProfile($uname, $fname, $lname, $lives, $from, $pic) { ?>
 						<h5>Lives in <?php echo $lives; ?></h5>
 						<h5>From <?php echo $from; ?></h5>
 					</td>
-				</tr>
-			</table>
-			<input type="submit" value="Go to Pofile"/>
-		</div>
-	</form>	
 <?php }
 
 /*

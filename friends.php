@@ -55,7 +55,11 @@
 						<input type='hidden' name='user2' value='<?php echo $id2?>'/>
 					</form>
 					<?php addProfile($email, $fname, $lname, "$liveCity, $liveState", "$fromCity, $fromState", $image); ?>
-					<input type='submit' form='friend_form' value='Unfriend'/>
+					<td>
+						<input type="submit" class='block' value="Go to Profile"/>
+						<input type='submit' class='block' form='friend_form' value='Unfriend'/>
+					</td>
+					</tr></table></div></form>
 		<?php
 				}
 				else {

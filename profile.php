@@ -131,13 +131,15 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 		</div>
 		<div>
 			<img src=<?php echo "images/$image"; ?> alt='profile image'/>
-			<form action="upload_test.php" method="post" name="upload_image" enctype="multipart/form-data">
-				<fieldset>
-					<label for="upload_image">Pick an image to upload as profile picture:</label>
-						<input type="file" name="upload_image" id="upload_image"/>
-					<input type="submit" value="Upload" />
-				</fieldset>
-			</form>
+			<?php if ( $_SESSION['profile'] == $_SESSION['user'] ){ ?>
+				<form action="upload_test.php" method="post" name="upload_image" enctype="multipart/form-data">
+					<fieldset>
+						<label for="upload_image">Pick an image to upload as profile picture:</label>
+							<input type="file" name="upload_image" id="upload_image"/>
+						<input type="submit" value="Upload" />
+					</fieldset>
+				</form>
+			<?php } ?>
 		</div> 
 		<div>
 			<p>Status History</p>

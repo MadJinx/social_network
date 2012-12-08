@@ -73,3 +73,8 @@ body {
 	float:right;
 	margin:1.5em;
 }
+
+.block {
+	display: block;
+	width: 100px;
+}
