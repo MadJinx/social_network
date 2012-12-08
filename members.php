@@ -15,7 +15,7 @@
 	<body>
 		<?php addMenu(); ?>
 
-		<h1>Welcome to the Members Page</h1>
+		<h1>Bad Pen Members</h1>
 
 		<form method="get" action="members.php" id="search">
 			Search for Members you know:

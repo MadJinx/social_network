@@ -17,7 +17,6 @@
 <title>Welcome Page</title>
 </head>
 <body>
-	<h1>Welcome</h1>
 	<div>
 		<h3>Log In</h3>
 		<form action="user_check.php" method="post">

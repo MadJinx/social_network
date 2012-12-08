@@ -55,7 +55,7 @@ DONE	A menu that allows users to navigate to their profile or any other that the
 	</head>
 	<body>
 		<?php addMenu(); ?>
-		<h1>Welcome to your profile page</h1>
+		<h1>Welcome to Yo' Profile</h1>
 		<div>
 			<h4>You are logged in as <?= $_SESSION['user']."." ?></h4>
 			

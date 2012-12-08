@@ -20,11 +20,11 @@ function addMenu() { ?>
 	<div class="menu" id="m">
 		<div class="imen" onClick="toggleVis('m');">Menu</div>
 		<ul>
-			<li><img src="images/home.png" alt="home" onClick="warp('home');"/></li>
-			<li><img src="images/profile.png" alt="profile" onClick="warp('profile');"/></li>
-			<li><img src="images/friends.png" alt="friends" onClick="warp('friends');"/></li>
-			<li><img src="images/members.png" alt="members" onClick="warp('members');"/></li>
-			<li><img src="images/logout.png" alt="logout" onClick="warp('logout');"/></li>
+			<li><img src="images/home.png" alt="home" onClick="warp('home');" title="HOME"/></li>
+			<li><img src="images/profile.png" alt="profile" onClick="warp('profile');" title="PROFILE"/></li>
+			<li><img src="images/friends.png" alt="friends" onClick="warp('friends');" title="PENPALS"/></li>
+			<li><img src="images/members.png" alt="members" onClick="warp('members');" title="MEMBERS"/></li>
+			<li><img src="images/logout.png" alt="logout" onClick="warp('logout');" title="LOGOUT"/></li>
 		</ul>
 	</div>
 	<div id="logo">

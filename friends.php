@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<?php addMenu(); ?>
-		<h1>Welcome to the Friends Page</h1>
+		<h1>Bad PenPals</h1>
 
 		<?php
 			// Connect to DB

@@ -10,11 +10,11 @@
 	// Call the common header function.
 	common_header();
 ?>
-	<title>Your Home</title>
+	<title>Your </title>
 	</head>
 	<body>
 		<?php addMenu(); ?>
-		<h1>Welcome to the Home Page</h1>
+		<h1>Home Base</h1>
 		<form action='post.php' method='post'>
 			<fieldset>
 				<textarea id='message' name='message' rows='4' cols='80' maxlength='255' placeholder="Anything you'd like to share today?"></textarea>
