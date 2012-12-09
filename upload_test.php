@@ -7,7 +7,6 @@
 	}
 	// Include the common PHP file
 	include_once("common.php");
-	// Call the common header function.
 	
 	$db = getDatabaseHandle();
 	$id = getUserId($db);
